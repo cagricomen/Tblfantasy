@@ -1,0 +1,9 @@
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\obj\Debug\netstandard2.0\TBlFantasy.Entity.csprojAssemblyReference.cache
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\obj\Debug\netstandard2.0\TBlFantasy.Entity.AssemblyInfoInputs.cache
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\obj\Debug\netstandard2.0\TBlFantasy.Entity.AssemblyInfo.cs
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\obj\Debug\netstandard2.0\TBlFantasy.Entity.csproj.CoreCompileInputs.cache
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\bin\Debug\netstandard2.0\TBlFantasy.Entity.deps.json
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\bin\Debug\netstandard2.0\TBlFantasy.Entity.dll
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\bin\Debug\netstandard2.0\TBlFantasy.Entity.pdb
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\obj\Debug\netstandard2.0\TBlFantasy.Entity.dll
+C:\Users\cagri\Desktop\TBLFANTASY\src\TBlFantasy.Entity\obj\Debug\netstandard2.0\TBlFantasy.Entity.pdb
