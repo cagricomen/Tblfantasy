@@ -1,11 +1,53 @@
-import CounterExample from 'components/counter-example'
-import FetchData from 'components/fetch-data'
-import HomePage from 'components/home-page'
-import About from 'components/about'
+import HomePage from 'components/pages/home-page'
+import Fixture from 'components/pages/content/fixture'
+import ScoreHistory from 'components/pages/content/teamdesign'
+import TeamStats from 'components/pages/content/teamstats'
+import Forbidden from 'components/root/forbidden'
 
 export const routes = [
-  { name: 'home', path: '/', component: HomePage, display: 'Home', icon: 'home' },
-  { name: 'about', path: '/about', component: About, display: 'About Template', icon: 'info' },
-  { name: 'counter', path: '/counter', component: CounterExample, display: 'Counter', icon: 'graduation-cap' },
-  { name: 'fetch-data', path: '/fetch-data', component: FetchData, display: 'Data', icon: 'list' }
+  {
+    name: 'home-page',
+    path: '/pages/home-page',
+    component: HomePage,
+    display: 'Home Page',
+    icon: 'home'
+  },
+  {
+    name: 'fixture',
+    path: '/pages/content/fixture',
+    component: Fixture,
+    display: 'Fixture',
+    icon: 'basketball-ball',
+  },
+  {
+    name: 'teamdesign',
+    path: '/pages/content/teamdesign/',
+    component: ScoreHistory,
+    display: 'Team Design',
+    icon: 'poll',
+    hidden: true
+  },
+  {
+    name: 'teamstats',
+    path: '/pages/content/teamstats',
+    component: TeamStats,
+    display: 'Team Stats',
+    icon: 'list-alt'
+  },
+  {
+    divider: true,
+    path: ''
+  },
+  {
+    name: 'account-view',
+    path: '/Identity/Account/Manage',
+    display: 'Account',
+    icon: 'user-circle'
+  },
+  {
+    name: 'forbidden',
+    path: '/forbidden',
+    hidden: "true",
+    component: Forbidden
+  },
 ]

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { routes } from '../router/routes';
+import { routes } from '../../router/routes';
 
 export default {
   data() {

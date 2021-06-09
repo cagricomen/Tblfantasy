@@ -3,7 +3,7 @@
     <div class="layout-container" id="app">
     <nav-menu params="route: route"></nav-menu>
     <div class="layout-content">
-      <!-- notifications/ -->
+      <notifications/>
       <!-- Page content -->
       <div class="container-fluid flex-grow-1 container-p-y">
         <router-view></router-view>

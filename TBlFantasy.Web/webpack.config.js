@@ -9,7 +9,7 @@ module.exports = () => {
   console.log('Building for \x1b[33m%s\x1b[0m', process.env.NODE_ENV)
 
   const isDevBuild = !(process.env.NODE_ENV && process.env.NODE_ENV === 'production')
-  
+
   const extractCSS = new MiniCssExtractPlugin({
     filename: 'style.css'
   })
@@ -22,11 +22,13 @@ module.exports = () => {
       extensions: ['.js', '.vue'],
       alias: isDevBuild ? {
         'vue$': 'vue/dist/vue',
+        '@': path.resolve(__dirname, './ClientApp'),
         'components': path.resolve(__dirname, './ClientApp/components'),
         'views': path.resolve(__dirname, './ClientApp/views'),
         'utils': path.resolve(__dirname, './ClientApp/utils'),
         'api': path.resolve(__dirname, './ClientApp/store/api')
       } : {
+        '@': path.resolve(__dirname, './ClientApp'),
         'components': path.resolve(__dirname, './ClientApp/components'),
         'views': path.resolve(__dirname, './ClientApp/views'),
         'utils': path.resolve(__dirname, './ClientApp/utils'),

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TBlFantasy.Entity;
@@ -9,9 +10,10 @@ using TBlFantasy.Entity;
 namespace TBlFantasy.Entity.Migrations
 {
     [DbContext(typeof(TBLDContext))]
-    partial class TBLDContextModelSnapshot : ModelSnapshot
+    [Migration("20210608185811_database-table-added")]
+    partial class databasetableadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,34 +143,6 @@ namespace TBlFantasy.Entity.Migrations
                     b.ToTable("FakeUser");
                 });
 
-            modelBuilder.Entity("TBlFantasy.Entity.FakeUserMatches", b =>
-                {
-                    b.Property<Guid>("MatchId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("FakeId");
-
-                    b.Property<int>("FakeScore");
-
-                    b.Property<string>("FakeTeam");
-
-                    b.Property<Guid>("UserId");
-
-                    b.Property<int>("UserScore");
-
-                    b.Property<string>("UserTeam");
-
-                    b.Property<string>("Week");
-
-                    b.Property<int>("Weeks");
-
-                    b.Property<string>("Winner");
-
-                    b.HasKey("MatchId");
-
-                    b.ToTable("FakeUserMatches");
-                });
-
             modelBuilder.Entity("TBlFantasy.Entity.TBLBasketballer", b =>
                 {
                     b.Property<Guid>("BasketballerId")
@@ -263,8 +237,6 @@ namespace TBlFantasy.Entity.Migrations
                     b.Property<string>("Week");
 
                     b.Property<int>("Weeks");
-
-                    b.Property<string>("Winner");
 
                     b.HasKey("MatchId");
 
