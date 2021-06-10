@@ -35,7 +35,8 @@ namespace TBlFantasy.Web.Controllers
                 UserId = UserId,
                 Name = value.Name,
                 TeamId = Guid.NewGuid(),
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                TeamNumber = 0
             };
             Db.Add(dataObject);
             var data = new TBLLeague
@@ -50,6 +51,7 @@ namespace TBlFantasy.Web.Controllers
             var random = new Random();
             int skipNumber = random.Next(70);
             var fakeUser = await Db.FakeUsers.Skip(skipNumber).Take(9).ToListAsync();
+            int tmp = 1;
             foreach (var fake in fakeUser)
             {
                 var fakeTeam = new TBLTeam
@@ -57,7 +59,8 @@ namespace TBlFantasy.Web.Controllers
                     TeamId = Guid.NewGuid(),
                     UserId = fake.FakeId,
                     Name = fake.TeamName,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    TeamNumber = tmp
                 };
                 var fakeData = new TBLLeague
                 {
@@ -69,24 +72,8 @@ namespace TBlFantasy.Web.Controllers
                 };
                 Db.Teams.Add(fakeTeam);
                 Db.Leagues.Add(fakeData);
+                tmp++;
             }
-            for (int i = 0; i < 9; i++)
-            {
-                var matchData = new TBLMatches
-                {
-                    MatchId = Guid.NewGuid(),
-                    UserId = UserId,
-                    FakeId = fakeUser[i].FakeId,
-                    UserTeam = value.Name,
-                    FakeTeam = fakeUser[i].TeamName,
-                    Weeks = i,
-                    Week = $"{i + 1}.Week"
-                };
-                Db.Matches.Add(matchData);
-            }
-
-
-
             var result = await Db.SaveChangesAsync();
             if (result > 0)
                 return Success("Team name saved");

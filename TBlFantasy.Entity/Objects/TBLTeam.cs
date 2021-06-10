@@ -18,5 +18,6 @@ namespace TBlFantasy.Entity
         public int Lose { get; set; }
         public int Points { get; set; }
         public decimal FantasyScore { get; set; }
+        public int TeamNumber { get; set; }
     }
 }

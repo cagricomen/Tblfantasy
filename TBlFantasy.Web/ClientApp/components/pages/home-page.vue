@@ -47,9 +47,13 @@
         v-model="model.name"
         width="%50"
       />
-      <button @click="save" class="btn btn-primary">
+      <div class="d-flex justify-content-between">
+        <button @click="save" class="btn btn-primary">
         <icon icon="plus" /> Save
       </button>
+      <h3 class="text-danger">Herkes sadece bir takım kaydedebilir.</h3>
+      </div>
+
     </div>
   </div>
 </template>
@@ -71,7 +75,7 @@ export default {
         this.model.id = this.$route.params.id;
       }
       let result = await service.save(this.model);
-      if (result.success ) {
+      if (result.success) {
         router.push({
           name: "teamdesign"
         });

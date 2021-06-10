@@ -28,16 +28,18 @@ namespace TBlFantasy.Web
             DoWork();
             return Task.CompletedTask;
         }
+
         private async void DoWork()
         {
-            var week = 0;
+            var week = 1;
             while (true)
             {
                 using (var scope = Services.CreateScope())
                 {
                     var Db = scope.ServiceProvider.GetRequiredService<TBLDContext>();
                     var players = new List<BasketballPlayer>();
-                    var matchAdress = new List<string> { "https://www.mackolik.com/basketbol/mac/anadolu-efes-spor-kul%C3%BCb%C3%BC-vs-petkim-spor-kul%C3%BCb%C3%BC/1wggp3pfzydyidokltpugj7ro", "https://www.mackolik.com/basketbol/mac/tofa%C5%9F-spor-kul%C3%BCb%C3%BC-vs-gaziantep-basketbol/1wkrn5igq7ccf7k2vq5nvjac4", "https://www.mackolik.com/basketbol/mac/p%C4%B1nar-kar%C5%9F%C4%B1yaka-spor-kul%C3%BCb%C3%BC-vs-frutti-extra-bursaspor/1wp6e5fjdtqn74eycd6qnb9xw", "https://www.mackolik.com/basketbol/mac/bah%C3%A7e%C5%9Fehir-koleji-spor-kul%C3%BCb%C3%BC-vs-ogm-orman-spor-kul%C3%BCb%C3%BC/1wtglreai6m00u8pjpiy4wg7o", "https://www.mackolik.com/basketbol/mac/t%C3%BCrk-telekom-basketbol-kul%C3%BCb%C3%BC-vs-be%C5%9Fikta%C5%9F-icrypex/6cn7kyhbkxeyb9nz0q35umhw4", "https://www.mackolik.com/basketbol/mac/dar%C3%BC%C5%9F%C5%9Fafaka-spor-kul%C3%BCb%C3%BC-vs-fethiye-belediye-basketbol-kul%C3%BCb%C3%BC/6crpw4ig4e6eozebm9eccd82c", "https://www.mackolik.com/basketbol/mac/meksa-yat%C4%B1r%C4%B1m-afyon-belediyespor-vs-fenerbah%C3%A7e/6cvultnboiwyrd8uem8tnxc0k", "https://www.mackolik.com/basketbol/mac/b%C3%BCy%C3%BCk%C3%A7ekmece-vs-galatasaray/6czw93hyamqkajq1chifgvx90", "https://www.mackolik.com/basketbol/mac/dar%C3%BC%C5%9F%C5%9Fafaka-spor-kul%C3%BCb%C3%BC-vs-fenerbah%C3%A7e/7balps97u9mm6z3cwqw6qqsr8" };
+                    var matchAdress = new List<string>
+                    { "https://www.mackolik.com/basketbol/mac/petkim-spor-kul%C3%BCb%C3%BC-vs-gaziantep-basketbol/83vx7erv9cxxyagg3dhm7b6s4", "https://www.mackolik.com/basketbol/mac/b%C3%BCy%C3%BCk%C3%A7ekmece-vs-fenerbah%C3%A7e/843w4o2uxdkkgqaoi68xx6uqc", "https://www.mackolik.com/basketbol/mac/anadolu-efes-spor-kul%C3%BCb%C3%BC-vs-p%C4%B1nar-kar%C5%9F%C4%B1yaka-spor-kul%C3%BCb%C3%BC/849guk47wuicunb38mt26n1n8", "https://www.mackolik.com/basketbol/mac/meksa-yat%C4%B1r%C4%B1m-afyon-belediyespor-vs-frutti-extra-bursaspor/83qnclwwkcgeorqsolyf4bmdw" , "https://www.mackolik.com/basketbol/mac/t%C3%BCrk-telekom-basketbol-kul%C3%BCb%C3%BC-vs-ogm-orman-spor-kul%C3%BCb%C3%BC/84ep84pgbd90f01qy0awxkx78", "https://www.mackolik.com/basketbol/mac/tofa%C5%9F-spor-kul%C3%BCb%C3%BC-vs-fethiye-belediye-basketbol-kul%C3%BCb%C3%BC/84knww2h5fnbxwg1ywcxul3bo", "https://www.mackolik.com/basketbol/mac/bah%C3%A7e%C5%9Fehir-koleji-spor-kul%C3%BCb%C3%BC-vs-galatasaray/84qbo1cvbkpfxoecmboqlvtw4" ,"https://www.mackolik.com/basketbol/mac/dar%C3%BC%C5%9F%C5%9Fafaka-spor-kul%C3%BCb%C3%BC-vs-be%C5%9Fikta%C5%9F-icrypex/84w5swmnuobkj5udlxiwi27tg" };
                     foreach (var adress in matchAdress)
                     {
                         var hweb = new HtmlAgilityPack.HtmlWeb();
@@ -144,115 +146,88 @@ namespace TBlFantasy.Web
                             data.FantasyScore = (player.Points + 1.2m * (player.Rebounds) + 1.5m * (player.Assists) + 2m * player.Blocks + 2m * player.Steals - 3m * player.Steals);
                         }
                     }
-                    var userFantasyScore = await Db.Teams.FirstOrDefaultAsync(x => x.UserId == Guid.Parse("2917abb5-0b3a-475d-b391-48cecc2122b2"));
+                    //var userFantasyScore = await Db.Teams.ToListAsync();
 
-                    var lists = await Db.Basketballers.Join(Db.TeamPlayers, x => x.BasketballerId, y => y.BasketballerId, (x, y) => new
-                    {
-                        FantasyScore = x.FantasyScore
-                    }).ToListAsync();
-                    decimal teamScore = 0m;
+                    // var lists = await Db.Basketballers.Join(Db.TeamPlayers, x => x.BasketballerId, y => y.BasketballerId, (x, y) => new
+                    // {
+                    //     FantasyScore = x.FantasyScore
+                    // }).ToListAsync();
+                    // decimal teamScore = 0m;
 
-                    foreach (var list in lists)
+                    // foreach (var list in lists)
+                    // {
+                    //     teamScore += list.FantasyScore;
+                    // }
+                    for (int i = 0; i < 10; i++)
                     {
-                        teamScore += list.FantasyScore;
-                    }
-
-                    userFantasyScore.FantasyScore = teamScore;
-
-                    var winnerCheck = await Db.Matches.FirstOrDefaultAsync(x => x.Weeks == week);
-                    var userTeam = await Db.Teams.FirstOrDefaultAsync(x => x.UserId == Guid.Parse("2917abb5-0b3a-475d-b391-48cecc2122b2"));
-
-                    winnerCheck.UserScore = Convert.ToInt32(userTeam.FantasyScore / 2m);
-                    if (winnerCheck.UserScore > winnerCheck.FakeScore)
-                    {
-                        winnerCheck.Winner = winnerCheck.UserTeam;
-                    }
-                    else if (winnerCheck.UserScore == winnerCheck.FakeScore)
-                    {
-                        winnerCheck.Winner = "The match has not been played yet.";
-                    }
-                    else
-                    {
-                        winnerCheck.Winner = winnerCheck.FakeTeam;
-                    }
-                    var value = await Db.Teams.FirstOrDefaultAsync(x => x.UserId == Guid.Parse("2917abb5-0b3a-475d-b391-48cecc2122b2"));
-                    var fakeUser = await Db.Teams.Where(x => x.UserId != Guid.Parse("2917abb5-0b3a-475d-b391-48cecc2122b2")).ToListAsync();
-                    FakeUserMatches fakeMatch = null;
-                    for (int i = 0; i < 1; i++)
-                    {
-                        if (i == 0)
+                        var teamScore = await Db.Teams.FirstOrDefaultAsync(x => x.TeamNumber == i);
+                        var lists = await Db.TeamPlayers.Where(x => x.TeamNumber == i).Join(Db.Basketballers, x => x.BasketballerId, y => y.BasketballerId, (x, y) => new
                         {
-                            for (int j = 0; j < 5; j++)
-                            {
-                                if (j == 0)
-                                {
-                                    fakeMatch = new FakeUserMatches
-                                    {
-                                        MatchId = Guid.NewGuid(),
-                                        UserId = Guid.Parse("2917abb5-0b3a-475d-b391-48cecc2122b2"),
-                                        FakeId = fakeUser[0].UserId,
-                                        UserTeam = value.Name,
-                                        FakeTeam = fakeUser[0].Name,
-                                        Week = $"{i+1}.Week",
-                                        Weeks = 0,
-                                    };
-                                }
-                                if (j == 1)
-                                {
-                                    fakeMatch = new FakeUserMatches
-                                    {
-                                        MatchId = Guid.NewGuid(),
-                                        UserId = fakeUser[1].UserId,
-                                        FakeId = fakeUser[2].UserId,
-                                        UserTeam = fakeUser[1].Name,
-                                        FakeTeam = fakeUser[2].Name,
-                                        Week = $"{i+1}.Week",
-                                        Weeks = 0,
-                                    };
-                                }
-                                if (j == 2)
-                                {
-                                    fakeMatch = new FakeUserMatches
-                                    {
-                                        MatchId = Guid.NewGuid(),
-                                        UserId = fakeUser[3].UserId,
-                                        FakeId = fakeUser[4].UserId,
-                                        UserTeam = fakeUser[3].Name,
-                                        FakeTeam = fakeUser[4].Name,
-                                        Week = $"{i+1}.Week",
-                                        Weeks = 0,
-                                    };
-                                }
-                                if (j == 3)
-                                {
-                                    fakeMatch = new FakeUserMatches
-                                    {
-                                        MatchId = Guid.NewGuid(),
-                                        UserId = fakeUser[5].UserId,
-                                        FakeId = fakeUser[6].UserId,
-                                        UserTeam = fakeUser[5].Name,
-                                        FakeTeam = fakeUser[6].Name,
-                                        Week = $"{i+1}.Week",
-                                        Weeks = 0,
-                                    };
-                                }
-                                if (j == 4)
-                                {
-                                    fakeMatch = new FakeUserMatches
-                                    {
-                                        MatchId = Guid.NewGuid(),
-                                        UserId = fakeUser[7].UserId,
-                                        FakeId = fakeUser[8].UserId,
-                                        UserTeam = fakeUser[7].Name,
-                                        FakeTeam = fakeUser[8].Name,
-                                        Week = $"{i+1}.Week",
-                                        Weeks = 0,
-                                    };
-                                }
-                                Db.FakeUserMatches.Add(fakeMatch);
-                            }
+                            FantasyScore = y.FantasyScore
+                        }).ToListAsync();
+                        decimal scores = 0m;
+                        foreach (var list in lists)
+                        {
+                            scores += list.FantasyScore;
+                        }
+
+                        //var teamScore = await Db.Teams.Join(Db.TeamPlayers, x => x.TeamId, )
+                    }
+
+                    //userFantasyScore.FantasyScore = teamScore;
+
+                    var winnerCheck = await Db.FakeUserMatches.Where(x => x.Weeks == week).ToListAsync();
+                    foreach (var check in winnerCheck)
+                    {
+                        var sorgu = await Db.Teams.FirstOrDefaultAsync( x => x.UserId == check.UserId);
+                        check.UserScore = Convert.ToInt32(sorgu.FantasyScore);
+                        var sorgu2 = await Db.Teams.FirstOrDefaultAsync(x =>x.UserId == check.FakeId);
+                        check.FakeScore = Convert.ToInt32(sorgu2.FantasyScore);
+                        if( check.UserScore > check.FakeScore)
+                        {
+                            check.Winner = check.UserTeam;
+                        }
+                        else if( check.UserScore < check.FakeScore)
+                        {
+                            check.Winner = check.FakeTeam;
+                        }
+                        else
+                        {
+                            check.Winner = "The match has not been played yet.";
                         }
                     }
+                    //    foreach (var check in winnerCheck)
+                    //     {
+                    //         var homeTeam = await Db.Teams.FirstOrDefaultAsync(x => x.TeamId == check.UserId);
+                    //         var awayTeam = await Db.Teams.FirstOrDefaultAsync(x => x.TeamId == check.FakeId);
+                    //         if (homeTeam.FantasyScore > awayTeam.FantasyScore)
+                    //         {
+                    //             check.Winner = homeTeam.Name;
+                    //         }
+                    //         else if (homeTeam.FantasyScore < awayTeam.FantasyScore)
+                    //         {
+                    //             check.Winner = awayTeam.Name;
+                    //          }
+                    //         else{
+                    //             check.Winner = "The match has not been played yet.";
+                    //         }
+                    //     }
+
+
+                    // winnerCheck.UserScore = Convert.ToInt32(userTeam.FantasyScore / 2m);
+                    // if (winnerCheck.UserScore > winnerCheck.FakeScore)
+                    // {
+                    //     winnerCheck.Winner = winnerCheck.UserTeam;
+                    // }
+                    // else if (winnerCheck.UserScore == winnerCheck.FakeScore)
+                    // {
+                    //     winnerCheck.Winner = "The match has not been played yet.";
+                    // }
+                    // else
+                    // {
+                    //     winnerCheck.Winner = winnerCheck.FakeTeam;
+                    // }
+
 
 
                     await Db.SaveChangesAsync(_token);
@@ -284,5 +259,15 @@ namespace TBlFantasy.Web
         public int Blocks;
         public int Steals;
         public int Turnovers;
+        // public int No;
+        // public string Name;
+        // public string Position;
+        // public int Height;
+        // public int Age;
+        // public int Match;
+        // public string Matchtime;
+        // public decimal AverageP;
+        // public decimal AverageA;
+        // public decimal AverageR;
     }
 }

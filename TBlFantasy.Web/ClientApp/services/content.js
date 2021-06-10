@@ -28,6 +28,7 @@ const ContentService = {
       throw result.error;
     }
   },
+
   async save(value) {
     var result = await http.post("/api/basketballer", value);
     if (result.status === 200) {
@@ -48,6 +49,15 @@ const ContentService = {
   },
   async teamGet(id) {
     var result = await http.get("/api/team/teamstats/" + id);
+    if (result.status === 200) {
+      return result.data;
+    } else {
+      console.error(result.error);
+      throw result.error;
+    }
+  },
+  async fakeGet() {
+    var result = await http.get("/api/fake");
     if (result.status === 200) {
       return result.data;
     } else {

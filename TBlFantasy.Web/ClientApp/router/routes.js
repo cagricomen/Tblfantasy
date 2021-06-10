@@ -2,6 +2,7 @@ import HomePage from 'components/pages/home-page'
 import Fixture from 'components/pages/content/fixture'
 import ScoreHistory from 'components/pages/content/teamdesign'
 import TeamStats from 'components/pages/content/teamstats'
+import FakeUser from 'components/pages/content/fakeuser'
 import Forbidden from 'components/root/forbidden'
 
 export const routes = [
@@ -32,6 +33,13 @@ export const routes = [
     path: '/pages/content/teamstats',
     component: TeamStats,
     display: 'Team Stats',
+    icon: 'list-alt'
+  },
+  {
+    name: 'fakeuser',
+    path: '/pages/content/fakeuser',
+    component: FakeUser,
+    display: 'All fixture',
     icon: 'list-alt'
   },
   {

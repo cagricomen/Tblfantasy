@@ -11,5 +11,6 @@ namespace TBlFantasy.Entity
         public Guid tpId { get; set; }
         public Guid TeamId { get; set; }
         public Guid BasketballerId { get; set; }
+        public int TeamNumber { get; set; }
     }
 }
