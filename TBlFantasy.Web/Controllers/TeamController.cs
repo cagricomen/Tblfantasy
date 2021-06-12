@@ -13,37 +13,7 @@ namespace TBlFantasy.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var list = await Db.Teams.ToListAsync();
-            return Success(null, list);
-        }
-
-        [HttpGet("{id?}")]
-        public async Task<IActionResult> TeamGet([FromRoute] Guid? id)
-        {
-            var list = await Db.FakeUserMatches.Where(x => x.UserId == UserId).OrderBy(x => x.Weeks).ToListAsync();
-            return Success(null, list);
-        }
-
-        [HttpGet("teamstats/{id}")]
-        public async Task<IActionResult> TeamStats(Guid id)
-        {
-            var user = await Db.Teams.FirstOrDefaultAsync(x => x.UserId == UserId);
-            //var list = await Db.TeamPlayers.Where(x => x.TeamId == Guid.Parse("9a4baf79-ef29-4e5e-ae3d-f473e4dfeb77")).ToListAsync();
-            var list = await Db.TeamPlayers.Where(x => x.TeamId == user.TeamId).Join(Db.Basketballers, x => x.BasketballerId, y => y.BasketballerId, (x, y) => new
-            {
-                Name = y.Name,
-                Points = y.Points,
-                Assists = y.Assists,
-                Rebounds = y.Rebounds,
-                Blocks = y.Blocks,
-                Steals = y.Steals,
-                Turnovers = y.Turnovers,
-                TwoPoint = y.TwoPointShot,
-                ThreePoint = y.ThreePointShot,
-                FreeThrown = y.freeThrown,
-            }).ToListAsync();
-
-
+            var list = await Db.Teams.OrderByDescending(x => x.Points).ToListAsync();
             return Success(null, list);
         }
 
@@ -612,7 +582,8 @@ namespace TBlFantasy.Web.Controllers
             TBLTeamPlayer fakeTeamData = null;
             foreach (var fake in fakeUser)
             {
-                var allPlayers = await Db.Basketballers.Skip(5 + tmp).Take(10).ToListAsync();
+                var allPlayers = await Db.Basketballers.OrderByDescending(x =>x.PirValue).Skip(1 + tmp).Take(10).ToListAsync();
+
                 foreach (var player in allPlayers)
                 {
                     fakeTeamData = new TBLTeamPlayer

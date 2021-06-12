@@ -31,7 +31,6 @@ namespace TBlFantasy.Web
 
         private async void DoWork()
         {
-            var week = 1;
             while (true)
             {
                 using (var scope = Services.CreateScope())
@@ -146,90 +145,6 @@ namespace TBlFantasy.Web
                             data.FantasyScore = (player.Points + 1.2m * (player.Rebounds) + 1.5m * (player.Assists) + 2m * player.Blocks + 2m * player.Steals - 3m * player.Steals);
                         }
                     }
-                    //var userFantasyScore = await Db.Teams.ToListAsync();
-
-                    // var lists = await Db.Basketballers.Join(Db.TeamPlayers, x => x.BasketballerId, y => y.BasketballerId, (x, y) => new
-                    // {
-                    //     FantasyScore = x.FantasyScore
-                    // }).ToListAsync();
-                    // decimal teamScore = 0m;
-
-                    // foreach (var list in lists)
-                    // {
-                    //     teamScore += list.FantasyScore;
-                    // }
-                    for (int i = 0; i < 10; i++)
-                    {
-                        var teamScore = await Db.Teams.FirstOrDefaultAsync(x => x.TeamNumber == i);
-                        var lists = await Db.TeamPlayers.Where(x => x.TeamNumber == i).Join(Db.Basketballers, x => x.BasketballerId, y => y.BasketballerId, (x, y) => new
-                        {
-                            FantasyScore = y.FantasyScore
-                        }).ToListAsync();
-                        decimal scores = 0m;
-                        foreach (var list in lists)
-                        {
-                            scores += list.FantasyScore;
-                        }
-
-                        //var teamScore = await Db.Teams.Join(Db.TeamPlayers, x => x.TeamId, )
-                    }
-
-                    //userFantasyScore.FantasyScore = teamScore;
-
-                    var winnerCheck = await Db.FakeUserMatches.Where(x => x.Weeks == week).ToListAsync();
-                    foreach (var check in winnerCheck)
-                    {
-                        var sorgu = await Db.Teams.FirstOrDefaultAsync( x => x.UserId == check.UserId);
-                        check.UserScore = Convert.ToInt32(sorgu.FantasyScore);
-                        var sorgu2 = await Db.Teams.FirstOrDefaultAsync(x =>x.UserId == check.FakeId);
-                        check.FakeScore = Convert.ToInt32(sorgu2.FantasyScore);
-                        if( check.UserScore > check.FakeScore)
-                        {
-                            check.Winner = check.UserTeam;
-                        }
-                        else if( check.UserScore < check.FakeScore)
-                        {
-                            check.Winner = check.FakeTeam;
-                        }
-                        else
-                        {
-                            check.Winner = "The match has not been played yet.";
-                        }
-                    }
-                    //    foreach (var check in winnerCheck)
-                    //     {
-                    //         var homeTeam = await Db.Teams.FirstOrDefaultAsync(x => x.TeamId == check.UserId);
-                    //         var awayTeam = await Db.Teams.FirstOrDefaultAsync(x => x.TeamId == check.FakeId);
-                    //         if (homeTeam.FantasyScore > awayTeam.FantasyScore)
-                    //         {
-                    //             check.Winner = homeTeam.Name;
-                    //         }
-                    //         else if (homeTeam.FantasyScore < awayTeam.FantasyScore)
-                    //         {
-                    //             check.Winner = awayTeam.Name;
-                    //          }
-                    //         else{
-                    //             check.Winner = "The match has not been played yet.";
-                    //         }
-                    //     }
-
-
-                    // winnerCheck.UserScore = Convert.ToInt32(userTeam.FantasyScore / 2m);
-                    // if (winnerCheck.UserScore > winnerCheck.FakeScore)
-                    // {
-                    //     winnerCheck.Winner = winnerCheck.UserTeam;
-                    // }
-                    // else if (winnerCheck.UserScore == winnerCheck.FakeScore)
-                    // {
-                    //     winnerCheck.Winner = "The match has not been played yet.";
-                    // }
-                    // else
-                    // {
-                    //     winnerCheck.Winner = winnerCheck.FakeTeam;
-                    // }
-
-
-
                     await Db.SaveChangesAsync(_token);
 
                 }

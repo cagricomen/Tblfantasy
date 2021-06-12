@@ -10,6 +10,15 @@ const ContentService = {
       throw result.error;
     }
   },
+  async teamGet() {
+    var result = await http.get("/api/teamStats");
+    if (result.status === 200) {
+      return result.data;
+    } else {
+      console.error(result.error);
+      throw result.error;
+    }
+  },
   async teams() {
     var result = await http.get("/api/team");
     if (result.status === 200) {
@@ -19,8 +28,8 @@ const ContentService = {
       throw result.error;
     }
   },
-  async teamMatch(id) {
-    var result = await http.get("/api/team/score-history"+id);
+  async fakeGet() {
+    var result = await http.get("/api/fake");
     if (result.status === 200) {
       return result.data;
     } else {
@@ -28,7 +37,15 @@ const ContentService = {
       throw result.error;
     }
   },
-
+  async playerGet() {
+    var result = await http.get("/api/player");
+    if (result.status === 200) {
+      return result.data;
+    } else {
+      console.error(result.error);
+      throw result.error;
+    }
+  },
   async save(value) {
     var result = await http.post("/api/basketballer", value);
     if (result.status === 200) {
@@ -47,23 +64,6 @@ const ContentService = {
       throw result.error;
     }
   },
-  async teamGet(id) {
-    var result = await http.get("/api/team/teamstats/" + id);
-    if (result.status === 200) {
-      return result.data;
-    } else {
-      console.error(result.error);
-      throw result.error;
-    }
-  },
-  async fakeGet() {
-    var result = await http.get("/api/fake");
-    if (result.status === 200) {
-      return result.data;
-    } else {
-      console.error(result.error);
-      throw result.error;
-    }
-  }
+
 }
 export default ContentService;
