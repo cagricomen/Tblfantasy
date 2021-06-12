@@ -16,6 +16,7 @@
               <th>T</th>
               <th>W</th>
               <th>L</th>
+              <th>P</th>
             </tr>
           </thead>
           <tbody v-for="(item, index) in contents" :key="index">
@@ -25,6 +26,7 @@
               <td>{{ item.gamesPlayed }}</td>
               <td>{{ item.win }}</td>
               <td>{{ item.lose }}</td>
+              <td>{{ item.points }}</td>
             </tr>
           </tbody>
         </table>
@@ -73,7 +75,7 @@ export default {
     if (result.data && result.data.length) {
       this.contents.push(...result.data);
     }
-    var fixture = await service.teamMatch(this.$route.params.id);
+    var fixture = await service.teamGet();
     console.log(fixture);
     if (fixture.data && fixture.data.length) {
       this.matches.push(...fixture.data);

@@ -25,7 +25,7 @@
               <td>{{ item.userScore }}</td>
               <td>{{ item.fakeTeam }}</td>
               <td>{{ item.fakeScore }}</td>
-              <td >{{ item.winner }}</td>
+              <td class="text-danger">{{ item.winner }}</td>
             </tr>
           </tbody>
         </table>

@@ -48,7 +48,7 @@ export default {
     };
   },
   async mounted() {
-    let result = await service.teamGet(this.$route.params.id);
+    let result = await service.playerGet();
     if (result.data && result.data.length) {
       this.teamPlayers.push(...result.data);
     }
