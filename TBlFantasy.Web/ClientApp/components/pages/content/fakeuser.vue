@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head icon="basketball-ball" title="Fixture" />
+    <page-head icon="basketball-ball" title="All Fixture" />
     <div class="d-flex justify-content-between ">
       <h3 class=" text-primary mr-3"> ALL FIXTURE</h3>
       <h3></h3>

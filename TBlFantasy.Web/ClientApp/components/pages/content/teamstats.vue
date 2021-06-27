@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head icon="basketball-ball" title="Fixture" />
+    <page-head icon="basketball-ball" title="Team Stats" />
     <div class="row d-flex justify-content-between">
       <div class="table-responsive card ">
         <table class="table card-table ">

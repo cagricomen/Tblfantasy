@@ -68,8 +68,8 @@ namespace TBlFantasy.Web
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            //services.AddHostedService<TBLBSBasketballer>();
-            //services.AddHostedService<TBLBSMatch>();
+            services.AddHostedService<TBLBSBasketballer>();
+            services.AddHostedService<TBLBSMatch>();
             // Simple example with dependency injection for a data provider.
         }
 

@@ -28,9 +28,7 @@ namespace TBlFantasy.Web
 
         private async void DoWork()
         {
-            var week = 2;
-            while (true)
-            {
+            var week = 3;
                 using (var scope = Services.CreateScope())
                 {
                     var Db = scope.ServiceProvider.GetRequiredService<TBLDContext>();
@@ -81,7 +79,7 @@ namespace TBlFantasy.Web
                     }
                     await Db.SaveChangesAsync(_token);
                 }
-            }
+
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
